@@ -3,6 +3,41 @@ version: "3.9"
 services:
   kodespace:
     build: .
-    image: "antoniorios17/kodespace:latest"
+    image: "kodespace01/kodespace-website:latest"
     ports:
-      - "8081:80"
+      - "7575:80"
+    networks:
+      - mynetwork
+  jenkins:
+    build: .
+    image: "kodespace01/jenkins:latest"
+    ports:
+      - "7576:8080"
+    networks:
+      - mynetwork
+  mario:
+    build: .
+    image: "kodespace01/mario:latest"
+    ports:
+      - "7577:8080"
+    networks:
+      - mynetwork
+  terraform:
+    build: .
+    image: "kodespace01/terraform-wetty:latest"
+    ports:
+      - "7578:3000"
+    networks:
+      - mynetwork
+  docker:
+    build: .
+    image: "kodespace01/docker-wetty:latest"
+    ports:
+      - "7579:4000"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    external:
+      name: kodespace_network
